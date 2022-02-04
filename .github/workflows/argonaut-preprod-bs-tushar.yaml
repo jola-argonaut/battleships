@@ -23,10 +23,6 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
       - name: Fetch repo
         uses: actions/checkout@v2
-      - name: Get the branch name
-        shell: bash
-        run: echo ::set-output name=BRANCH::${GITHUB_REF#refs/heads/}
-        id: get_branch
       - name: Get Short SHA
         id: get_sha
         run: echo ::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)
@@ -70,6 +66,10 @@ jobs:
     steps:
       - name: Fetch repo
         uses: actions/checkout@v2
+      - name: Get the branch name
+        shell: bash
+        run: echo ::set-output name=BRANCH::${GITHUB_REF#refs/heads/}
+        id: get_branch
       - name: Get Short SHA
         id: get_sha
         run: echo ::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)
