@@ -66,6 +66,8 @@ jobs:
     steps:
       - name: Fetch repo
         uses: actions/checkout@v2
+      - name: Fetch branch name
+        uses: nelonoel/branch-name@v1
       - name: Get Short SHA
         id: get_sha
         run: echo ::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)
