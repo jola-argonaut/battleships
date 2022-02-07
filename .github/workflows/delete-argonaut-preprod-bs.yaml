@@ -12,7 +12,6 @@ jobs:
     
     runs-on: ubuntu-latest
     name: Deleting App
-    needs: build
     steps:
       - name: Download art
         run: curl --silent https://github.com/argonautdev/public/releases/latest/download/art-linux -L -o art
