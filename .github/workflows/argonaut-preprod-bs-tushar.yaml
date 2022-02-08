@@ -4,7 +4,7 @@ name: "Build and Push to CR"
 on:
   push:
     branches:
-      - "**"
+      - main
     tags:
       - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
   workflow_dispatch:
@@ -66,10 +66,6 @@ jobs:
     steps:
       - name: Fetch repo
         uses: actions/checkout@v2
-      - name: Fetch branch name
-        shell: bash
-        run: echo ::set-output name=BRANCH_NAME::${GITHUB_REF#refs/heads/}
-        id: get_branch_name
       - name: Get Short SHA
         id: get_sha
         run: echo ::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)
@@ -80,5 +76,5 @@ jobs:
           chmod +x ./art
           sudo mv ./art /usr/local/bin/art
           art configure --key ${{ secrets.ART_KEY }} --secret ${{ secrets.ART_SECRET }}
-          art app deploy -f .art/argonaut-preprod-bs-tushar.yaml --set image="${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/argonaut/bs-tushar" --set 'labels.argonaut\.dev/git-provider'='github' --set  argonaut.git-provider='github' --set  imageTag="${{ steps.get_sha.outputs.SHA_SHORT }}"  --set appName="bs-tushar-${{ steps.get_branch_name.outputs.BRANCH_NAME }}"  --set argonaut.env="preprod"  --set argonaut.region="us-east-2"  --set argonaut.cluster="preprod"  --set argonaut.serviceType="stateless"  --set argonaut.imageRegistry="ecr" 
+          art app deploy -f .art/argonaut-preprod-bs-tushar.yaml --set image="${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/argonaut/bs-tushar" --set 'labels.argonaut\.dev/git-provider'='github' --set  argonaut.git-provider='github' --set  imageTag="${{ steps.get_sha.outputs.SHA_SHORT }}"  --set appName="bs-tushar"  --set argonaut.env="preprod"  --set argonaut.region="us-east-2"  --set argonaut.cluster="preprod"  --set argonaut.serviceType="stateless"  --set argonaut.imageRegistry="ecr" 
 
