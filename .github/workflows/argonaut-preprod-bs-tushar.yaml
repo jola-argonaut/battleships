@@ -4,7 +4,7 @@ name: "Build and Push to CR"
 on:
   push:
     branches:
-      - dev2
+      - main
     tags:
       - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
   workflow_dispatch:
@@ -76,5 +76,5 @@ jobs:
           chmod +x ./art
           sudo mv ./art /usr/local/bin/art
           art configure --key ${{ secrets.ART_KEY }} --secret ${{ secrets.ART_SECRET }}
-          art app deploy -f .art/argonaut-preprod-bs-tushar.yaml --set image="${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/argonaut/bs-tushar" --set 'labels.argonaut\.dev/git-provider'='github' --set  argonaut.git-provider='github' --set  imageTag="${{ steps.get_sha.outputs.SHA_SHORT }}"  --set appName="bs-tushar-dev2"  --set argonaut.env="preprod"  --set argonaut.region="us-east-2"  --set argonaut.cluster="preprod"  --set argonaut.serviceType="stateless"  --set argonaut.imageRegistry="ecr" 
+          art app deploy -f .art/argonaut-preprod-bs-tushar.yaml --set image="${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/argonaut/bs-tushar" --set 'labels.argonaut\.dev/git-provider'='github' --set  argonaut.git-provider='github' --set  imageTag="${{ steps.get_sha.outputs.SHA_SHORT }}"  --set appName="bs-tushar"  --set argonaut.env="preprod"  --set argonaut.region="us-east-2"  --set argonaut.cluster="preprod"  --set argonaut.serviceType="stateless"  --set argonaut.imageRegistry="ecr" 
 
