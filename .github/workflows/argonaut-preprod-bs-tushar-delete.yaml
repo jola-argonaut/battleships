@@ -19,4 +19,4 @@ jobs:
           chmod +x ./art
           sudo mv ./art /usr/local/bin/art
           art configure --key ${{ secrets.ART_KEY }} --secret ${{ secrets.ART_SECRET }}
-          art app delete -f .art/argonaut-preprod-bs.yaml --set appName="bs-tushar-dev2"
+          art app delete -f .art/argonaut-preprod-bs.yaml --set appName="bs-tushar"
