@@ -12,9 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Deleting App
     steps:
-      - name: Fetch repo
+      - name: Fetch Repo
         uses: actions/checkout@v2
-      - name: Clean up for the branch ${{ github.event.ref }}
+      - name: Fetch Branch
+        run: echo "Clean up for the branch ${{ github.event.ref }}"
       - name: Download art
         run: curl --silent https://github.com/argonautdev/public/releases/latest/download/art-linux -L -o art
       - name: Configure art
